@@ -38,6 +38,17 @@ export default class App extends Component {
       this.setState((prev) => ({ contacts: [newContact, ...prev.contacts] }))
     }
   }
+  componentDidMount() {
+    this.setState({ contacts: JSON.parse(localStorage.getItem('contacts')) })
+  }
+  componentDidUpdate(prevP, prevS) {
+    console.log(prevS);
+    console.log(this.state);
+    if (this.state.contacts !== prevS.contact) {
+      console.log(`new contacts`);
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+    }
+  }
 
   handleContactDelete = (id) => {
     this.setState((prev) => ({ contacts: prev.contacts.filter(item => item.id !== id) }))
