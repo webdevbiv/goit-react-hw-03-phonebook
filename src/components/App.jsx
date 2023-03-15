@@ -33,12 +33,14 @@ export default class App extends Component {
       this.setState((prev) => ({ contacts: [newContact, ...prev.contacts] }))
     }
   }
+
   componentDidMount() {
     const localContacts = JSON.parse(localStorage.getItem('contacts'))
     if (localContacts) {
       this.setState({ contacts: localContacts })
     }
   }
+
   componentDidUpdate(prevP, prevS) {
     if (this.state.contacts !== prevS.contact) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
@@ -62,7 +64,7 @@ export default class App extends Component {
 
   render() {
     const { filter, contacts } = this.state
-    // console.log(contacts.length);
+    console.log('this', contacts.length);
     return (
       <div className={'container'}>
         <ToastContainer
